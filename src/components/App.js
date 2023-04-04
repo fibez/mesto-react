@@ -1,13 +1,11 @@
-import logo from './images/logo.svg';
-import './App.css';
+// import './App.css';
+import { Header } from './Header';
 
 function App() {
   return (
     <>
       <body className="page">
-        <header className="header page__header">
-          <img className="header__logo" src={logo} alt="Логотип портала" />
-        </header>
+        <Header />
         <main className="content">
           <section className="profile content__profile">
             <div className="profile__info-container">
