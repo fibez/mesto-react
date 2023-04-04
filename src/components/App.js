@@ -1,34 +1,15 @@
 // import './App.css';
 import { Header } from './Header';
+import { Main } from './Main';
+import { Footer } from './Footer';
 
 function App() {
   return (
     <>
       <body className="page">
         <Header />
-        <main className="content">
-          <section className="profile content__profile">
-            <div className="profile__info-container">
-              <button className="profile__avatar-button">
-                <img
-                  className="profile__avatar"
-                  src="<%=require('./images/profile-avatar.jpg')%>"
-                  alt="Аватар профиля"
-                />
-              </button>
-              <p className="profile__description">Description</p>
-              <div className="profile__name-button-container">
-                <h1 className="profile__name">Me</h1>
-                <button className="profile__edit-button" type="button" aria-label="Редактировать описание профиля" />
-              </div>
-            </div>
-            <button className="profile__add-button" type="button" aria-label="Добавить фотографию" />
-          </section>
-          <section className="elements content__elements" />
-        </main>
-        <footer className="footer page__footer">
-          <p className="footer__copyright">©&nbsp;2020 Mesto Russia</p>
-        </footer>
+        <Main />
+        <Footer />
         <div className="popup popup_type_profile-edit">
           <div className="popup__container">
             <button className="popup__close-button" type="button" aria-label="Закрыть попап" />
