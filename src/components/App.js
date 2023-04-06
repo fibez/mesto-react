@@ -1,127 +1,46 @@
 // import './App.css';
+import React, { useEffect, useState } from 'react';
 import { Header } from './Header';
 import { Main } from './Main';
 import { Footer } from './Footer';
 
 function App() {
+  const [isEditProfileOpen, setIsEditProfileOpen] = useState(false);
+  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
+
+  function handleEditProfileCLick() {
+    setIsEditProfileOpen(true);
+  }
+
+  function handleAddCardClick() {
+    setIsAddPlacePopupOpen(true);
+  }
+
+  function handleAvatarClick() {
+    setIsEditAvatarPopupOpen(true);
+  }
+
+  function closeAllPopups() {
+    setIsEditProfileOpen(false);
+    setIsAddPlacePopupOpen(false);
+    setIsEditAvatarPopupOpen(false);
+  }
+
   return (
     <>
       <body className="page">
         <Header />
-        <Main />
+        <Main
+          onEditAvatar={handleAvatarClick}
+          isEditAvatarPopupOpen={isEditAvatarPopupOpen}
+          onEditProfile={handleEditProfileCLick}
+          isEditProfileOpen={isEditProfileOpen}
+          onAddPlace={handleAddCardClick}
+          isAddPlacePopupOpen={isAddPlacePopupOpen}
+          onClose={closeAllPopups}
+        />
         <Footer />
-        <div className="popup popup_type_profile-edit">
-          <div className="popup__container">
-            <button className="popup__close-button" type="button" aria-label="Закрыть попап" />
-            <p className="popup__description">Редактировать профиль</p>
-            <form className="popup__form popup__form_type_profile-edit" name="profile-form" noValidate="">
-              <input
-                className="popup__input popup__input_type_name"
-                id="profile-name"
-                placeholder="Как вас зовут?"
-                name="profile-input-name"
-                defaultValue=""
-                required=""
-                minLength={2}
-                maxLength={40}
-              />
-              <span className="popup__error" id="profile-name-error" />
-              <input
-                className="popup__input popup__input_type_profession"
-                id="profile-profession"
-                placeholder="Кто вы?"
-                name="profile-input-profession"
-                defaultValue=""
-                required=""
-                minLength={2}
-                maxLength={200}
-              />
-              <span className="popup__error" id="profile-profession-error" />
-              <button className="popup__save-button popup__save-button_inactive" type="submit" disabled="">
-                Сохранить
-              </button>
-            </form>
-          </div>
-        </div>
-        <div className="popup popup_type_cards-add">
-          <div className="popup__container">
-            <button className="popup__close-button" type="button" aria-label="Закрыть попап" />
-            <p className="popup__description">Новое место</p>
-            <form className="popup__form popup__form_type_add-card" name="add-cards-form" noValidate="">
-              <input
-                className="popup__input popup__input_type_place-name"
-                id="place-name"
-                placeholder="Название"
-                name="cards-input-place-name"
-                defaultValue=""
-                required=""
-                minLength={2}
-                maxLength={30}
-              />
-              <span className="popup__error popup__error_type_add-card" id="place-name-error" />
-              <input
-                className="popup__input popup__input_type_img-link"
-                id="img-link"
-                placeholder="Ссылка на картинку"
-                name="cards-input-img-link"
-                defaultValue=""
-                required=""
-                type="url"
-              />
-              <span className="popup__error popup__error_type_img-link" id="img-link-error" />
-              <button className="popup__save-button popup__save-button_inactive" type="submit" disabled="">
-                Создать
-              </button>
-            </form>
-          </div>
-        </div>
-        <div className="popup popup_type_galery">
-          <div className="popup__container popup__galery-container">
-            <button className="popup__close-button" type="button" aria-label="Закрыть попап" />
-            <img className="popup__image" src="#" alt="Фотография" />
-            <h2 className="popup__image-desription" />
-          </div>
-        </div>
-        <div className="popup popup_type_remove-card">
-          <div className="popup__container">
-            <button className="popup__close-button" type="button" aria-label="Закрыть попап" />
-            <p className="popup__description">Вы уверены?</p>
-            <form className="popup__form popup__form_type_remove-card" name="remove-card-form" noValidate="">
-              <button
-                className="popup__save-button popup__confirm-button"
-                type="submit"
-                aria-label="Подтвердить удаление карточки?"
-              >
-                Да
-              </button>
-            </form>
-          </div>
-        </div>
-        <div className="popup popup_type_edit-avatar">
-          <div className="popup__container">
-            <button className="popup__close-button" type="button" aria-label="Закрыть попап" />
-            <p className="popup__description">Обновить аватар</p>
-            <form className="popup__form popup__form_type_edit-avatar" name="edit-avatar-form" noValidate="">
-              <input
-                className="popup__input popup__input_type_avatar-link"
-                id="avatar-link"
-                placeholder="Ссылка на аватар"
-                name="cards-input-avatar-link"
-                defaultValue=""
-                required=""
-                type="url"
-              />
-              <span className="popup__error popup__error_type_avatar-link" id="avatar-link-error" />
-              <button
-                className="popup__save-button popup__save-button_inactive"
-                type="submit"
-                aria-label="Сохранить новый аватар"
-              >
-                Сохранить
-              </button>
-            </form>
-          </div>
-        </div>
       </body>
     </>
   );
