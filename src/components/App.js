@@ -28,21 +28,19 @@ function App() {
   }
 
   return (
-    <>
-      <body className="page">
-        <Header />
-        <Main
-          onEditAvatar={handleAvatarClick}
-          isEditAvatarPopupOpen={isEditAvatarPopupOpen}
-          onEditProfile={handleEditProfileCLick}
-          isEditProfileOpen={isEditProfileOpen}
-          onAddPlace={handleAddCardClick}
-          isAddPlacePopupOpen={isAddPlacePopupOpen}
-          onClose={closeAllPopups}
-        />
-        <Footer />
-      </body>
-    </>
+    <body className="page">
+      <Header />
+      <Main
+        onEditAvatar={handleAvatarClick}
+        isEditAvatarPopupOpen={isEditAvatarPopupOpen}
+        onEditProfile={handleEditProfileCLick}
+        isEditProfileOpen={isEditProfileOpen}
+        onAddPlace={handleAddCardClick}
+        isAddPlacePopupOpen={isAddPlacePopupOpen}
+        onClose={closeAllPopups}
+      />
+      <Footer />
+    </body>
   );
 }
 
