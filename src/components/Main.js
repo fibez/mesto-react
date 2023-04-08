@@ -4,19 +4,33 @@ import { PopupCardsAdd } from './PopupCardsAdd';
 import { PopupEditAvatar } from './PopupEditAvatar';
 import { ImagePopup } from './ImagePopup';
 import { PopupRemoveCard } from './PopupRemoveCard';
+import React, { useEffect, useState } from 'react';
+import { api } from './utils/Api';
 
 function Main(props) {
+  const [userName, setUserName] = useState('');
+  const [userDescription, setUserDescription] = useState('');
+  const [userAvatar, setUserAvatar] = useState(profileAvatar);
+
+  useEffect(() => {
+    Promise.resolve(api.getUserInfo()).then((res) => {
+      setUserName(res.name);
+      setUserDescription(res.about);
+      setUserAvatar(res.avatar);
+    });
+  });
+
   return (
     <>
       <main className="content">
         <section className="profile content__profile">
           <div className="profile__info-container">
             <button className="profile__avatar-button" onClick={props.onEditAvatar}>
-              <img className="profile__avatar" src={profileAvatar} alt="Аватар профиля" />
+              <img className="profile__avatar" src={userAvatar} alt="Аватар профиля" />
             </button>
-            <p className="profile__description">Description</p>
+            <p className="profile__description">{userDescription}</p>
             <div className="profile__name-button-container">
-              <h1 className="profile__name">Me</h1>
+              <h1 className="profile__name">{userName}</h1>
               <button
                 className="profile__edit-button"
                 type="button"
