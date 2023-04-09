@@ -2,8 +2,8 @@ import React from 'react';
 
 function ImagePopup(props) {
   const isOpened = Boolean(Object.keys(props.card).length);
-  const cardSrc = props.card.link;
-  const cardName = props.card.name;
+  const cardSrc = String(props.card.link);
+  const cardName = String(props.card.name);
 
   return (
     <>
@@ -11,7 +11,7 @@ function ImagePopup(props) {
         <div className="popup__container popup__galery-container">
           <button className="popup__close-button" type="button" aria-label="Закрыть попап" onClick={props.onClose} />
           <img className="popup__image" src={cardSrc} alt={cardName} />
-          <h2 className="popup__image-desription">{props.card.name}</h2>
+          <h2 className="popup__image-desription">{cardName}</h2>
         </div>
       </div>
     </>

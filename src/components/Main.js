@@ -25,11 +25,9 @@ function Main(props) {
 
   const renderedCard = cards.map((card) => {
     return (
-      <>
-        <li key={card._id}>
-          <Card card={card} onCardClick={props.onCardClick} />
-        </li>
-      </>
+      <li key={card._id}>
+        <Card card={card} onCardClick={props.onCardClick} />
+      </li>
     );
   });
 
