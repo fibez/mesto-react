@@ -42,6 +42,4 @@ function PopupProfileEdit(props) {
   );
 }
 
-// ${props.isOpened ? 'popup_opened' : ''}
-
 export { PopupProfileEdit };

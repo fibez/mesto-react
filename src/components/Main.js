@@ -1,9 +1,4 @@
 import profileAvatar from '../images/profile-avatar.jpg';
-import { PopupProfileEdit } from './PopupProfileEdit';
-import { PopupCardsAdd } from './PopupCardsAdd';
-import { PopupEditAvatar } from './PopupEditAvatar';
-import { ImagePopup } from './ImagePopup';
-import { PopupRemoveCard } from './PopupRemoveCard';
 import React, { useEffect, useState } from 'react';
 import { api } from './utils/Api';
 import { Card } from './Card';
@@ -28,10 +23,12 @@ function Main(props) {
       });
   }, []);
 
-  const renderedCard = cards.map((element) => {
+  const renderedCard = cards.map((card) => {
     return (
       <>
-        <Card card={element} />
+        <li key={card._id}>
+          <Card card={card} onCardClick={props.onCardClick} />
+        </li>
       </>
     );
   });
@@ -62,14 +59,9 @@ function Main(props) {
             onClick={props.onAddPlace}
           />
         </section>
-        <section className="elements content__elements">
+        <ul className="elements content__elements">
           <>{renderedCard}</>
-        </section>
-        <PopupProfileEdit isOpened={props.isEditProfileOpen} onClose={props.onClose} />
-        <PopupCardsAdd isOpened={props.isAddPlacePopupOpen} onClose={props.onClose} />
-        <PopupEditAvatar isOpened={props.isEditAvatarPopupOpen} onClose={props.onClose} />
-        <PopupRemoveCard isOpened={''} /> {/*-------------------*/}
-        <ImagePopup />
+        </ul>
       </main>
     </>
   );

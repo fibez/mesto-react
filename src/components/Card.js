@@ -1,16 +1,25 @@
+import React from 'react';
+
 function Card(props) {
+  const card = props.card;
+
   function showCounter() {
-    if (props.card.likes.length > 0) {
-      const counter = props.card.likes.length;
+    if (card.likes.length > 0) {
+      const counter = card.likes.length;
       return counter;
     }
   }
+
+  function handleCardClick() {
+    props.onCardClick(props.card);
+  }
+
   return (
     <>
       <div className="elements__card">
-        <img className="elements__image" src={props.card.link} alt="Фотография" />
+        <img className="elements__image" src={card.link} alt="Фотография" onClick={handleCardClick} />
         <div className="elements__wrapper">
-          <h2 className="elements__place-name">{props.card.name}</h2>
+          <h2 className="elements__place-name">{card.name}</h2>
           <div className="elements__like-container">
             <button className="elements__like" type="button" aria-label="Понравилось"></button>
             <span className="elements__like-counter">{showCounter()}</span>
