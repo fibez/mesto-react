@@ -13,6 +13,6 @@ Mesto-React - это одностраничный сайт, разработан
 
 ### Установка
 
-- <git clone >
-- <npm install >
-- <npm run start >
+- `git clone`
+- `npm install`
+- `npm run start`
