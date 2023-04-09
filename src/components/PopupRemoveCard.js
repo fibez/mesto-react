@@ -1,26 +1,8 @@
 import { PopupWithForm } from './PopupWithForm';
 
-function PopupRemoveCard(props) {
+function PopupRemoveCard({ isOpened, onClose }) {
   return (
-    <>
-      <PopupWithForm
-        popupType="remove-card"
-        name="Вы уверены?"
-        isOpened={props.isOpened}
-        onClose={props.onClose}
-        children={
-          <>
-            <button
-              className="popup__save-button popup__confirm-button"
-              type="submit"
-              aria-label="Подтвердить удаление карточки?"
-            >
-              Да
-            </button>
-          </>
-        }
-      />
-    </>
+    <PopupWithForm popupType="remove-card" name="Вы уверены?" isOpened={isOpened} onClose={onClose} buttonText={'Да'} />
   );
 }
 

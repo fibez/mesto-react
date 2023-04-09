@@ -1,9 +1,9 @@
 import profileAvatar from '../images/profile-avatar.jpg';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { api } from './utils/Api';
 import { Card } from './Card';
 
-function Main(props) {
+function Main({ onCardClick, onEditAvatar, onEditProfile, onAddPlace }) {
   const [userName, setUserName] = useState('');
   const [userDescription, setUserDescription] = useState('');
   const [userAvatar, setUserAvatar] = useState(profileAvatar);
@@ -23,20 +23,12 @@ function Main(props) {
       });
   }, []);
 
-  const renderedCard = cards.map((card) => {
-    return (
-      <li key={card._id}>
-        <Card card={card} onCardClick={props.onCardClick} />
-      </li>
-    );
-  });
-
   return (
     <>
       <main className="content">
         <section className="profile content__profile">
           <div className="profile__info-container">
-            <button className="profile__avatar-button" onClick={props.onEditAvatar}>
+            <button className="profile__avatar-button" onClick={onEditAvatar}>
               <img className="profile__avatar" src={userAvatar} alt="Аватар профиля" />
             </button>
             <p className="profile__description">{userDescription}</p>
@@ -46,19 +38,20 @@ function Main(props) {
                 className="profile__edit-button"
                 type="button"
                 aria-label="Редактировать описание профиля"
-                onClick={props.onEditProfile}
+                onClick={onEditProfile}
               />
             </div>
           </div>
-          <button
-            className="profile__add-button"
-            type="button"
-            aria-label="Добавить фотографию"
-            onClick={props.onAddPlace}
-          />
+          <button className="profile__add-button" type="button" aria-label="Добавить фотографию" onClick={onAddPlace} />
         </section>
         <ul className="elements content__elements">
-          <>{renderedCard}</>
+          {cards.map((card) => {
+            return (
+              <li key={card._id}>
+                <Card card={card} onCardClick={onCardClick} />
+              </li>
+            );
+          })}
         </ul>
       </main>
     </>

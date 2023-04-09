@@ -13,7 +13,7 @@ function App() {
   const [isEditProfileOpen, setIsEditProfileOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
-  const [selectedCard, setSelectedCard] = useState('');
+  const [selectedCard, setSelectedCard] = useState({});
 
   function handleEditProfileCLick() {
     setIsEditProfileOpen(true);
@@ -35,7 +35,7 @@ function App() {
     setIsEditProfileOpen(false);
     setIsAddPlacePopupOpen(false);
     setIsEditAvatarPopupOpen(false);
-    setSelectedCard('');
+    setSelectedCard({});
   }
 
   return (

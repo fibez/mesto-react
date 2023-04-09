@@ -1,8 +1,6 @@
 import React from 'react';
 
-function Card(props) {
-  const card = props.card;
-
+function Card({ card, onCardClick }) {
   function showCounter() {
     if (card.likes.length > 0) {
       const counter = card.likes.length;
@@ -11,7 +9,7 @@ function Card(props) {
   }
 
   function handleCardClick() {
-    props.onCardClick(props.card);
+    onCardClick(card);
   }
 
   return (
