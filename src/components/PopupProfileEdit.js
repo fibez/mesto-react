@@ -3,18 +3,16 @@ import { CurrentUserContext } from '../context/CurrentUserContext';
 import { PopupWithForm } from './PopupWithForm';
 
 function PopupProfileEdit({ isOpened, onClose, onUpdateUser }) {
+  const [name, setName] = useState('');
+  const [description, setDescription] = useState('');
   const currentUser = useContext(CurrentUserContext);
 
   useEffect(() => {
-    setName(currentUser.name);
-    setDescription(currentUser.about);
-  }, [currentUser]);
-
-  const [name, setName] = useState('');
-  const [description, setDescription] = useState('');
+    isOpened && setName(currentUser.name);
+    isOpened && setDescription(currentUser.about);
+  }, [isOpened, currentUser]);
 
   function handleSubmit(e) {
-    // Запрещаем браузеру переходить по адресу формы
     e.preventDefault();
 
     const userData = {
@@ -22,7 +20,6 @@ function PopupProfileEdit({ isOpened, onClose, onUpdateUser }) {
       about: description,
     };
 
-    // Передаём значения управляемых компонентов во внешний обработчик
     onUpdateUser(userData);
   }
 
@@ -48,7 +45,7 @@ function PopupProfileEdit({ isOpened, onClose, onUpdateUser }) {
         id="profile-name"
         placeholder="Как вас зовут?"
         name="profile-input-name"
-        defaultValue={name}
+        value={name}
         required=""
         minLength={2}
         maxLength={40}
@@ -60,7 +57,7 @@ function PopupProfileEdit({ isOpened, onClose, onUpdateUser }) {
         id="profile-profession"
         placeholder="Кто вы?"
         name="profile-input-profession"
-        defaultValue={description}
+        value={description}
         required=""
         minLength={2}
         maxLength={200}
