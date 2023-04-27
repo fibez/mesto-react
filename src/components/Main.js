@@ -1,27 +1,9 @@
-import profileAvatar from '../images/profile-avatar.jpg';
-import { useEffect, useState } from 'react';
-import { api } from './utils/Api';
+import { useContext, useEffect, useState } from 'react';
 import { Card } from './Card';
+import { CurrentUserContext } from '../context/CurrentUserContext';
 
-function Main({ onCardClick, onEditAvatar, onEditProfile, onAddPlace }) {
-  const [userName, setUserName] = useState('');
-  const [userDescription, setUserDescription] = useState('');
-  const [userAvatar, setUserAvatar] = useState(profileAvatar);
-  const [cards, setCards] = useState([]);
-
-  useEffect(() => {
-    Promise.all([api.getUserInfo(), api.getCards()])
-      .then(([userInfo, initialCards]) => {
-        setUserName(userInfo.name);
-        setUserDescription(userInfo.about);
-        setUserAvatar(userInfo.avatar);
-
-        setCards(initialCards);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  }, []);
+function Main({ onCardClick, onEditAvatar, onEditProfile, onAddPlace, onCardLike, onCardDelete, cards }) {
+  const currentUser = useContext(CurrentUserContext);
 
   return (
     <>
@@ -29,11 +11,11 @@ function Main({ onCardClick, onEditAvatar, onEditProfile, onAddPlace }) {
         <section className="profile content__profile">
           <div className="profile__info-container">
             <button className="profile__avatar-button" onClick={onEditAvatar}>
-              <img className="profile__avatar" src={userAvatar} alt="Аватар профиля" />
+              <img className="profile__avatar" src={currentUser.avatar} alt="Аватар профиля" />
             </button>
-            <p className="profile__description">{userDescription}</p>
+            <p className="profile__description">{currentUser.about}</p>
             <div className="profile__name-button-container">
-              <h1 className="profile__name">{userName}</h1>
+              <h1 className="profile__name">{currentUser.name}</h1>
               <button
                 className="profile__edit-button"
                 type="button"
@@ -48,7 +30,7 @@ function Main({ onCardClick, onEditAvatar, onEditProfile, onAddPlace }) {
           {cards.map((card) => {
             return (
               <li key={card._id}>
-                <Card card={card} onCardClick={onCardClick} />
+                <Card card={card} onCardClick={onCardClick} onCardLike={onCardLike} onCardDelete={onCardDelete} />
               </li>
             );
           })}
